@@ -23,6 +23,8 @@ body {
 }
 .icon {
   width: 50px;
+  vertical-align: middle;
+  margin-top: -20px;
 }
 .units {
   font-size: 14px;
@@ -58,14 +60,16 @@ a:link {
 }
 .wind {
   text-align: left;
-  font-size: 14px;
+  font-size: 12px;
   margin-bottom: 0;
   font-weight: 100;
+  font-style: italic;
 }
 .humidity {
   text-align: left;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 100;
+  font-style: italic;
 }
 .today,
 .today-card {
@@ -110,7 +114,9 @@ a:link {
   font-size: 18px;
   text-align: left;
 }
-
+.bottom-section {
+  margin-top: 10px;
+}
 .third-row {
   margin: 0 auto;
   width: 100% auto;
@@ -126,4 +132,6 @@ a:link {
 }
 .code-source {
   font-size: 14px;
+  margin-bottom: 0;
+  padding-left: 30px;
 }
