@@ -49,7 +49,6 @@ function enterCity(event) {
     replaceCity = replaceCity.trim();
   }
   replaceCity.innerHTML = `${newCity.value.toUpperCase()}`;
-
   axios.get(`${apiUrl}&appid=${apiKey}`).then(currentWeather);
 }
 
