@@ -61,10 +61,17 @@ function currentWeather(weather) {
   let windElement = document.querySelector("#wind");
   let humidityElement = document.querySelector("#humidity");
   let dateCityElement = document.querySelector("#date-city");
+  let iconElement = document.querySelector("#icon");
+
   tempElement.innerHTML = `${temperature}`;
   windElement.innerHTML = `${windSpeed}`;
   humidityElement.innerHTML = `${hum}`;
   dateCityElement.innerHTML = formatDate(weather.data.dt * 1000);
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${weather.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", weather.data.weather[0].description);
 }
 
 let citySearch = document.querySelector("#city-form");
