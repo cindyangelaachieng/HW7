@@ -28,7 +28,11 @@ body {
 }
 .units {
   font-size: 14px;
-  vertical-align: super;
+  vertical-align: 20px;
+}
+.active {
+  color: black;
+  cursor: default;
 }
 .card {
   display: block;

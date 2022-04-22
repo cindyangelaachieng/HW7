@@ -53,7 +53,9 @@ function enterCity(event) {
 }
 
 function currentWeather(weather) {
-  let temperature = Math.round(weather.data.main.temp);
+  celTemp = weather.data.main.temp;
+
+  let temperature = Math.round(celTemp);
   let windSpeed = Math.round(weather.data.wind.speed);
   let hum = Math.round(weather.data.main.humidity);
   let tempElement = document.querySelector("#temp-num");
@@ -101,6 +103,30 @@ function getPosition(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(currentLocation);
 }
+function showFahrTemp(event) {
+  event.preventDefault();
+  let fahrTemp = (celTemp * 9) / 5 + 32;
+  let tempElement = document.querySelector("#temp-num");
+  celLink.classList.remove("active");
+  fahrLink.classList.add("active");
+  tempElement.innerHTML = Math.round(fahrTemp);
+}
+
+function showCelTemp(event) {
+  event.preventDefault();
+  celLink.classList.add("active");
+  fahrLink.classList.remove("active");
+  let tempElement = document.querySelector("#temp-num");
+  tempElement.innerHTML = Math.round(celTemp);
+}
+
+let celTemp = null;
 
 let currentCity = document.querySelector("#current-form");
 currentCity.addEventListener("submit", getPosition);
+
+let fahrLink = document.querySelector("#fahr-link");
+fahrLink.addEventListener("click", showFahrTemp);
+
+let celLink = document.querySelector("#cel-link");
+celLink.addEventListener("click", showCelTemp);
