@@ -1,42 +1,42 @@
-//let date = document.querySelector("#date");
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
 
-let now = new Date();
-//let day = now.getDay();
-//let month = now.getMonth();
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-//day = days[now.getDay()];
-let months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
-//let date = now.getDate();
-let minute = now.getMinutes();
-let hour = now.getHours();
-
-document.querySelector("#date").innerHTML = now.getDate();
-document.querySelector("#day").innerHTML = days[now.getDay()];
-document.querySelector("#month").innerHTML = months[now.getMonth()];
-document.querySelector("#hours").innerHTML = (hour < 10 ? "0" : "") + hour;
-document.querySelector("#min").innerHTML = (minute < 10 ? ":0" : ":") + minute;
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[date.getDay()];
+  let monthDay = date.getDate();
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let month = months[date.getMonth()];
+  return `${day}, ${monthDay} ${month} \n ${hours}:${minutes}`;
+}
 
 function enterCity(event) {
   event.preventDefault();
@@ -49,7 +49,6 @@ function enterCity(event) {
     replaceCity = replaceCity.trim();
   }
   replaceCity.innerHTML = `${newCity.value.toUpperCase()}`;
-  //let newCity = document.querySelector("#city-search");
 
   axios.get(`${apiUrl}&appid=${apiKey}`).then(currentWeather);
 }
@@ -58,17 +57,18 @@ function currentWeather(weather) {
   let temperature = Math.round(weather.data.main.temp);
   let windSpeed = Math.round(weather.data.wind.speed);
   let hum = Math.round(weather.data.main.humidity);
-  document.querySelector("#temp-num").innerHTML = `${temperature}`;
-  document.querySelector("#wind").innerHTML = `${windSpeed}`;
-  document.querySelector("#humidity").innerHTML = `${hum}`;
-
-  //console.log(weather.main);
+  let tempElement = document.querySelector("#temp-num");
+  let windElement = document.querySelector("#wind");
+  let humidityElement = document.querySelector("#humidity");
+  let dateCityElement = document.querySelector("#date-city");
+  tempElement.innerHTML = `${temperature}`;
+  windElement.innerHTML = `${windSpeed}`;
+  humidityElement.innerHTML = `${hum}`;
+  dateCityElement.innerHTML = formatDate(weather.data.dt * 1000);
 }
 
 let citySearch = document.querySelector("#city-form");
 citySearch.addEventListener("submit", enterCity);
-
-//navigator.geolocation.getCurrentPosition(currentLocation);
 
 function currentLocation(location) {
   let apiKey = "bc8c015e37beb9dba84c5e94d482acec";
@@ -90,9 +90,6 @@ function showTemp(response) {
   document.querySelector("#wind").innerHTML = `${windSpeed}`;
   document.querySelector("#humidity").innerHTML = `${currentHumidity}`;
 }
-
-//let currentCity = document.querySelector("#current-location");
-//currentCity.addEventListener("submit", currentLocation);
 
 function getPosition(event) {
   event.preventDefault();
